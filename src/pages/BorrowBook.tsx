@@ -14,12 +14,13 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { CalendarIcon } from "lucide-react"
+import { CalendarIcon, Loader2 } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 import { useBorrowBookMutation } from "@/store/features/book/bookApi"
+import { useState } from "react"
 
 const formSchema = z.object({
     quantity: z.string(),
@@ -27,6 +28,7 @@ const formSchema = z.object({
 })
 
 const BorrowBook = () => {
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
     const { bookId } = useParams()
     const navigate = useNavigate()
     const [borrowBook] = useBorrowBookMutation()
@@ -40,6 +42,7 @@ const BorrowBook = () => {
     })
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        setIsSubmitting(true)
         const borrowInfo = {
             ...values,
             book: bookId,
@@ -60,6 +63,7 @@ const BorrowBook = () => {
             })
         } finally {
             form.reset()
+            setIsSubmitting(false)
         }
     }
 
@@ -123,7 +127,13 @@ const BorrowBook = () => {
                         </FormItem>
                     )}
                     />
-                <Button className="cursor-pointer" type="submit">Submit</Button>
+                <Button className="cursor-pointer" type="submit">
+                    {
+                        isSubmitting ? <>
+                            <Loader2 className="animate-spin" />
+                        </> : "Submit"
+                    }
+                </Button>
             </form>
         </Form>
         </div>

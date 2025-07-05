@@ -16,6 +16,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { useCreateBookMutation } from "@/store/features/book/bookApi"
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { Loader2 } from "lucide-react"
  
 export const formSchema = z.object({
   title: z.string().min(1, "Title is required").max(50),
@@ -27,6 +29,7 @@ export const formSchema = z.object({
 })
 
 const CreateBook = () => {
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
   const [createBook] = useCreateBookMutation()
   const navigate = useNavigate()
 
@@ -43,6 +46,7 @@ const CreateBook = () => {
   })
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true)
     const bookInfo = {
       ...values,
       copies: parseInt(values.copies),
@@ -61,6 +65,7 @@ const CreateBook = () => {
       })
     } finally {
       form.reset()
+      setIsSubmitting(false)
     }
   }
 
@@ -165,7 +170,13 @@ const CreateBook = () => {
             </FormItem>
           )}
         />
-        <Button className="cursor-pointer" type="submit">Submit</Button>
+        <Button className="cursor-pointer" type="submit">
+          {
+            isSubmitting ? <>
+              <Loader2 className="animate-spin" />
+            </> : "Submit"
+          }
+        </Button>
       </form>
     </Form>
     </div>

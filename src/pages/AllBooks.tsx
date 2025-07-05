@@ -25,12 +25,15 @@ import { Button } from "@/components/ui/button"
 import { BookPlus, Repeat, TextSearch, Trash2 } from "lucide-react"
 import { toast } from "sonner"
 import { Link } from "react-router-dom"
+import { useState } from "react"
 
 const AllBooks = () => {
+    const [isDeleting, setIsDeleting] = useState<boolean>(false)
     const { data: books, isLoading } = useGetAllBooksQuery(undefined)
     const [deleteBook] = useDeleteBookMutation()
 
     const handleDelete = async (id: string) => {
+      setIsDeleting(true)
       try {
         const response = await deleteBook(id).unwrap()
         toast(response.message)
@@ -41,10 +44,12 @@ const AllBooks = () => {
             background: 'red'
           }
         })
+      } finally {
+        setIsDeleting(false)
       }
     }
 
-    if (isLoading) {
+    if (isLoading || isDeleting) {
         return (
         <>
             <div className="flex justify-center py-5">

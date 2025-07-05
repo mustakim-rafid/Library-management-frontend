@@ -18,10 +18,12 @@ import { toast } from "sonner"
 import { useNavigate, useParams } from "react-router-dom"
 import { formSchema } from "./CreateBook"
 import { Skeleton } from "@/components/ui/skeleton"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { Loader2 } from "lucide-react"
 
 const EditBook = () => {
-    const { id } = useParams()
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const { id } = useParams()
   const {data: book, isLoading} = useGetBookByIdQuery(id)
   const [updateBook] = useUpdateBookMutation()
   const navigate = useNavigate()
@@ -52,6 +54,7 @@ const EditBook = () => {
   }, [book])
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true)
     const bookInfo = {
       ...values,
       copies: parseInt(values.copies),
@@ -70,6 +73,7 @@ const EditBook = () => {
       })
     } finally {
       form.reset()
+      setIsSubmitting(false)
     }
   }
   
@@ -181,7 +185,13 @@ const EditBook = () => {
             </FormItem>
           )}
         />
-        <Button className="cursor-pointer" type="submit">Save Changes</Button>
+        <Button className="cursor-pointer" type="submit">
+          {
+            isSubmitting ? <>
+              <Loader2 className="animate-spin" />
+            </> : "Save Changes"
+          }
+        </Button>
       </form>
     </Form>
     </div>
