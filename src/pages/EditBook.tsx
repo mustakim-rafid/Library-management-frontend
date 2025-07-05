@@ -175,7 +175,7 @@ const EditBook = () => {
             <FormItem>
               <FormLabel>Copies</FormLabel>
               <FormControl>
-                <Input className="w-20" placeholder="isbn" {...field} />
+                <Input className="w-20" placeholder="copies" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
