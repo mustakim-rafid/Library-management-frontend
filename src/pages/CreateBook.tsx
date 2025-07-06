@@ -70,7 +70,7 @@ const CreateBook = () => {
   }
 
   return (
-    <div className="mx-20">
+    <div className="md:mx-20 mx-3">
     <div>
       <h1 className="text-2xl text-center py-3 pt-5 font-semibold">Add New Book</h1>
     </div>

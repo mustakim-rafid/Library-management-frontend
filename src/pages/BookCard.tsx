@@ -28,7 +28,7 @@ function BookCard() {
 
   return (
     <div className="flex justify-center mt-10"> 
-      <Card className="w-full max-w-lg">
+      <Card className="w-full max-w-lg mx-2">
         <CardHeader>
           <CardTitle className="text-xl">Book Title: {bookDetails.data.title}</CardTitle>
           <CardDescription>Author: {bookDetails.data.author}</CardDescription>

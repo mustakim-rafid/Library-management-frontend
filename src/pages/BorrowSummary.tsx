@@ -19,7 +19,7 @@ const BorrowSummary = () => {
             <div className="flex justify-center py-5">
                 <h1 className="text-3xl flex justify-center">Borrow Summary</h1>
             </div>
-            <div className="space-y-3 mx-40">
+            <div className="space-y-3 md:mx-40 mx-5">
             <div className="grid grid-cols-3 gap-4">
                 <Skeleton className="h-6 rounded-sm w-full" />
                 <Skeleton className="h-6 rounded-sm w-full" />
@@ -42,7 +42,7 @@ const BorrowSummary = () => {
       <div className="flex justify-center py-5">
         <h1 className="text-3xl flex justify-center">Borrow Summary</h1>
       </div>
-      <div className="mx-40">
+      <div className="md:mx-40 mx-2">
       <Table >
             <TableCaption>List of Borrowed Books and Quantities</TableCaption>
             <TableHeader>

@@ -84,7 +84,7 @@ const AllBooks = () => {
     <div className="flex justify-center py-5">
         <h1 className="text-3xl flex justify-center">Book List</h1>
     </div>
-    <div className="mx-5">
+    <div className="md:mx-5 mx-2">
     <Table>
       <TableCaption>List of all books available</TableCaption>
       <TableHeader>

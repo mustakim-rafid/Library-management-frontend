@@ -80,7 +80,7 @@ const EditBook = () => {
   if (isLoading) {
     return (
         <>
-        <div>
+        <div className="">
         <h1 className="text-2xl text-center py-3 pt-5 font-semibold">Update Book</h1>
         </div>
         <div className="flex flex-col space-y-4 mx-14">
@@ -98,7 +98,7 @@ const EditBook = () => {
   }
 
   return (
-    <div className="mx-20">
+    <div className="md:mx-20 mx-3">
     <div>
       <h1 className="text-2xl text-center py-3 pt-5 font-semibold">Update Book</h1>
     </div>
